@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>吳宜蓁的學習作品集 | 數位科技概論</title>
+    <style>
+        :root {
+            --bg-main: #f4f7fc;
+            --bg-card: #ffffff;
+            --primary-blue: #0f3c6e;
+            --secondary-blue: #1d5f9f;
+            --accent-yellow: #fcd34d;
+            --hover-yellow: #fbbf24;
+            --light-yellow: #fef9c3;
+            --text-dark: #1e293b;
+            --text-muted: #475569;
+            --border-color: #cbd5e1;
+            --shadow-sm: 0 2px 4px rgba(15, 60, 110, 0.05);
+            --shadow-md: 0 4px 12px rgba(15, 60, 110, 0.08);
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+        }
+
+        /* Base Reset & Smooth Scroll */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Microsoft JhengHei", sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-dark);
+            line-height: 1.7;
+            padding: 0;
+            margin: 0;
+        }
+
+        header {
+            background-color: var(--primary-blue);
+            color: #ffffff;
+            border-bottom: 5px solid var(--accent-yellow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow-md);
+        }
+
+        .nav-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .site-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ffffff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .site-title span {
+            background-color: var(--accent-yellow);
+            color: var(--primary-blue);
+            padding: 0.2rem 0.6rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.85rem;
+            font-weight: 800;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.25rem;
+        }
+
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.5rem 0.75rem;
+            border-radius: var(--radius-sm);
+            transition: background-color 0.2s, color 0.2s;
+        }
+
+        nav a:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+            color: var(--accent-yellow);
+        }
+
+        /* Visible Focus State for Accessibility */
+        a:focus-visible,
+        button:focus-visible {
+            outline: 3px solid var(--accent-yellow);
+            outline-offset: 3px;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+            color: #ffffff;
+            padding: 4rem 1.5rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.75rem;
+            color: #ffffff;
+            letter-spacing: 1px;
+        }
+
+        .hero-tagline {
+            display: inline-block;
+            background-color: var(--accent-yellow);
+            color: var(--primary-blue);
+            font-weight: 700;
+            padding: 0.4rem 1.2rem;
+            border-radius: 20px;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            opacity: 0.95;
+            color: #e2e8f0;
+        }
+
+        main {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+
+        section {
+            background-color: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem 2rem;
+            margin-bottom: 2.5rem;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-color);
+        }
+
+        .section-title {
+            font-size: 1.75rem;
+            color: var(--primary-blue);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--accent-yellow);
+            display: inline-block;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        .about-card {
+            background-color: var(--bg-main);
+            padding: 1.5rem;
+            border-radius: var(--radius-md);
+            border-left: 5px solid var(--secondary-blue);
+        }
+
+        .about-card h3 {
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .works-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .work-card {
+            background-color: #ffffff;
+            border: 2px dashed var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 2rem 1.5rem;
+            text-align: center;
+            transition: transform 0.2s, border-color 0.2s;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 220px;
+        }
+
+        .work-card:hover {
+            border-color: var(--secondary-blue);
+            transform: translateY(-3px);
+        }
+
+        .badge-status {
+            align-self: center;
+            background-color: var(--light-yellow);
+            color: #92400e;
+            border: 1px solid var(--accent-yellow);
+            padding: 0.3rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .work-card h3 {
+            color: var(--primary-blue);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .work-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .goals-list {
+            list-style: none;
+            display: grid;
+            gap: 1rem;
+        }
+
+        .goals-list li {
+            background-color: var(--bg-main);
+            padding: 1rem 1.25rem;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .goal-icon {
+            background-color: var(--accent-yellow);
+            color: var(--primary-blue);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        footer {
+            background-color: var(--primary-blue);
+            color: #ffffff;
+            text-align: center;
+            padding: 2rem 1.5rem;
+            margin-top: 3rem;
+            border-top: 4px solid var(--accent-yellow);
+        }
+
+        footer p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        @media (max-width: 640px) {
+            .nav-container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            nav ul {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            section {
+                padding: 1.5rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <a href="#" class="site-title">
+                吳宜蓁 <span>作品集</span>
+            </a>
+            <nav aria-label="主要導覽">
+                <ul>
+                    <li><a href="#about">關於我</a></li>
+                    <li><a href="#works">作品展示</a></li>
+                    <li><a href="#goals">學習目標</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="hero">
+        <div class="hero-content">
+            <div class="hero-tagline">哈囉！歡迎來到我的網站</div>
+            <h1>吳宜蓁的學習作品集</h1>
+            <p>紀錄在「數位科技概論」課程中的學習歷程與成果展示</p>
+        </div>
+    </div>
+
+    <main>
+        <!-- About Section -->
+        <section id="about">
+            <h2 class="section-title">關於我</h2>
+            <div class="about-grid">
+                <div class="about-card">
+                    <h3>個人簡介</h3>
+                    <p>大家好，我是吳宜蓁。這是我個人學習作品集首頁，用於呈現數位科技概論相關學習與實作紀錄。</p>
+                </div>
+                <div class="about-card">
+                    <h3>學習興趣</h3>
+                    <p>我對「數位科技概論」領域充滿好奇，特別期待探索數位工具的應用、網頁基礎架構以及科技如何改寫我們的生活溝通方式。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Works Section -->
+        <section id="works">
+            <h2 class="section-title">作品展示</h2>
+            <div class="works-container">
+                <!-- 期中作品 -->
+                <div class="work-card">
+                    <div>
+                        <span class="badge-status">準備中</span>
+                        <h3>期中作品</h3>
+                        <p>數位科技概論期中專題成果，現正規劃與製作中，敬請期待。</p>
+                    </div>
+                </div>
+
+                <!-- 期末作品 -->
+                <div class="work-card">
+                    <div>
+                        <span class="badge-status">準備中</span>
+                        <h3>期末作品</h3>
+                        <p>數位科技概論期末綜合展示專案，預計於學期末發表。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Learning Goals Section -->
+        <section id="goals">
+            <h2 class="section-title">學習目標</h2>
+            <ul class="goals-list">
+                <li>
+                    <span class="goal-icon">1</span>
+                    <div>掌握網頁結構（HTML）與視覺樣式（CSS）的核心概念與實作技巧。</div>
+                </li>
+                <li>
+                    <span class="goal-icon">2</span>
+                    <div>理解數位科技概論中的基礎原理與最新發展趨勢。</div>
+                </li>
+                <li>
+                    <span class="goal-icon">3</span>
+                    <div>獨立完成完整的個人期中與期末作品專案並進行展示。</div>
+                </li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 吳宜蓁 的學習作品集 | 數位科技概論學習成果</p>
+    </footer>
+
+</body>
+</html>
