@@ -18,12 +18,12 @@
             --border-color: #cbd5e1;
             --shadow-sm: 0 2px 4px rgba(15, 60, 110, 0.05);
             --shadow-md: 0 4px 12px rgba(15, 60, 110, 0.08);
+            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
             --radius-sm: 8px;
             --radius-md: 12px;
             --radius-lg: 16px;
         }
 
-        /* Base Reset & Smooth Scroll */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -39,8 +39,6 @@
             background-color: var(--bg-main);
             color: var(--text-dark);
             line-height: 1.7;
-            padding: 0;
-            margin: 0;
         }
 
         header {
@@ -103,9 +101,9 @@
             color: var(--accent-yellow);
         }
 
-        /* Visible Focus State for Accessibility */
         a:focus-visible,
-        button:focus-visible {
+        button:focus-visible,
+        summary:focus-visible {
             outline: 3px solid var(--accent-yellow);
             outline-offset: 3px;
         }
@@ -115,7 +113,6 @@
             color: #ffffff;
             padding: 4rem 1.5rem;
             text-align: center;
-            position: relative;
         }
 
         .hero-content {
@@ -127,7 +124,6 @@
             font-size: 2.5rem;
             margin-bottom: 0.75rem;
             color: #ffffff;
-            letter-spacing: 1px;
         }
 
         .hero-tagline {
@@ -143,7 +139,6 @@
 
         .hero p {
             font-size: 1.15rem;
-            opacity: 0.95;
             color: #e2e8f0;
         }
 
@@ -192,7 +187,7 @@
 
         .works-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
             gap: 1.5rem;
             margin-top: 1rem;
         }
@@ -203,33 +198,23 @@
             border-radius: var(--radius-md);
             padding: 2rem 1.5rem;
             text-align: center;
-            transition: transform 0.2s, border-color 0.2s;
-            position: relative;
+            transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             min-height: 220px;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .work-card.featured {
+            border: 2px solid var(--secondary-blue);
+            background-color: #f8fafc;
         }
 
         .work-card:hover {
             border-color: var(--secondary-blue);
-            transform: translateY(-3px);
-        }
-
-        /* Clickable Card Link Style */
-        .work-card-link {
-            text-decoration: none;
-            color: inherit;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            height: 100%;
-        }
-
-        .work-card.active-card {
-            border-style: solid;
-            border-color: var(--secondary-blue);
-            cursor: pointer;
+            transform: translateY(-4px);
             box-shadow: var(--shadow-md);
         }
 
@@ -246,77 +231,71 @@
             margin-bottom: 1rem;
         }
 
-        .badge-status.completed {
-            background-color: #dcfce7;
-            color: #166534;
-            border-color: #86efac;
+        .badge-status.active {
+            background-color: var(--accent-yellow);
+            color: var(--primary-blue);
         }
 
-        .btn-detail {
-            display: inline-block;
+        .work-card h3 {
+            color: var(--primary-blue);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .work-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .card-link-text {
             margin-top: 1rem;
-            background-color: var(--primary-blue);
-            color: #ffffff;
-            padding: 0.5rem 1rem;
-            border-radius: var(--radius-sm);
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: background-color 0.2s;
+            color: var(--secondary-blue);
+            font-weight: 700;
+            font-size: 0.95rem;
         }
 
-        .work-card:hover .btn-detail {
-            background-color: var(--secondary-blue);
-            color: var(--accent-yellow);
-        }
-
-        /* CSS-Only Modal using :target */
-        .modal {
+        /* Pure CSS Modal System */
+        .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100vw;
-            height: 100vh;
+            width: 100%;
+            height: 100%;
             background-color: rgba(15, 60, 110, 0.6);
             backdrop-filter: blur(4px);
+            z-index: 1000;
             display: flex;
-            align-items: center;
             justify-content: center;
+            align-items: center;
+            padding: 1.5rem;
             opacity: 0;
             pointer-events: none;
             transition: opacity 0.3s ease;
-            z-index: 1000;
-            padding: 1.5rem;
         }
 
-        .modal:target {
+        .modal-overlay:target {
             opacity: 1;
             pointer-events: auto;
         }
 
         .modal-content {
             background-color: #ffffff;
-            max-width: 650px;
             width: 100%;
-            max-height: 85vh;
-            overflow-y: auto;
+            max-width: 850px;
+            max-height: 90vh;
             border-radius: var(--radius-lg);
-            padding: 2.5rem 2rem;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+            box-shadow: var(--shadow-lg);
+            border: 3px solid var(--accent-yellow);
+            overflow-y: auto;
             position: relative;
-            border-top: 6px solid var(--accent-yellow);
-            transform: translateY(20px);
-            transition: transform 0.3s ease;
-        }
-
-        .modal:target .modal-content {
-            transform: translateY(0);
+            padding: 2.5rem 2rem;
         }
 
         .modal-close {
             position: absolute;
-            top: 1.25rem;
-            right: 1.5rem;
-            font-size: 1.75rem;
+            top: 1rem;
+            right: 1.25rem;
+            font-size: 1.8rem;
             font-weight: bold;
             color: var(--text-muted);
             text-decoration: none;
@@ -336,70 +315,100 @@
             color: var(--primary-blue);
         }
 
-        .modal-overlay-close {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            text-decoration: none;
+        /* Course Weeks & Homework Styles */
+        .courses-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            margin-top: 1.5rem;
         }
 
-        .modal-header {
-            margin-bottom: 1.5rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid var(--border-color);
+        details.week-group {
+            background-color: var(--bg-main);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            transition: border-color 0.2s;
         }
 
-        .modal-header h3 {
+        details.week-group[open] {
+            border-color: var(--secondary-blue);
+            background-color: #ffffff;
+            box-shadow: var(--shadow-sm);
+        }
+
+        summary.week-header {
+            padding: 1rem 1.25rem;
+            font-size: 1.1rem;
+            font-weight: 700;
             color: var(--primary-blue);
-            font-size: 1.75rem;
-            margin-top: 0.5rem;
+            cursor: pointer;
+            background-color: var(--bg-main);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            list-style: none;
+            user-select: none;
         }
 
-        .modal-body {
-            color: var(--text-dark);
-            font-size: 1rem;
-            line-height: 1.8;
+        summary.week-header::-webkit-details-marker {
+            display: none;
         }
 
-        .modal-body h4 {
+        summary.week-header::after {
+            content: "＋";
+            font-size: 1.2rem;
             color: var(--secondary-blue);
-            margin: 1.25rem 0 0.5rem 0;
-            font-size: 1.15rem;
+            font-weight: bold;
         }
 
-        .modal-body ul {
-            padding-left: 1.25rem;
-            margin-bottom: 1rem;
+        details[open] summary.week-header::after {
+            content: "－";
         }
 
-        .modal-footer {
-            margin-top: 2rem;
-            text-align: right;
-            padding-top: 1rem;
+        summary.week-header:hover {
+            background-color: #e2e8f0;
+        }
+
+        .homework-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+            padding: 1.25rem;
+            background-color: #ffffff;
             border-top: 1px solid var(--border-color);
         }
 
-        .btn-close-modal {
-            display: inline-block;
-            background-color: var(--primary-blue);
-            color: #ffffff;
-            padding: 0.6rem 1.25rem;
+        .homework-card {
+            background-color: var(--bg-main);
+            border: 1px solid var(--border-color);
             border-radius: var(--radius-sm);
-            text-decoration: none;
-            font-weight: 600;
-            transition: background-color 0.2s;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
-        .btn-close-modal:hover {
-            background-color: var(--secondary-blue);
-            color: var(--accent-yellow);
-        }
-
-        .work-card p {
-            color: var(--text-muted);
+        .homework-card h5 {
+            color: var(--primary-blue);
             font-size: 0.95rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .homework-card p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .homework-tag {
+            font-size: 0.75rem;
+            padding: 0.15rem 0.5rem;
+            background-color: var(--light-yellow);
+            color: #92400e;
+            border-radius: 4px;
+            align-self: flex-start;
+            font-weight: 600;
         }
 
         .goals-list {
@@ -460,12 +469,12 @@
                 font-size: 1.8rem;
             }
 
-            .hero p {
-                font-size: 1rem;
+            .modal-content {
+                padding: 1.5rem 1rem;
             }
 
-            section {
-                padding: 1.5rem 1rem;
+            .homework-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -515,17 +524,15 @@
         <section id="works">
             <h2 class="section-title">作品展示</h2>
             <div class="works-container">
-                <!-- 數位科技概論卡片（可點擊查看細部頁面） -->
-                <div class="work-card active-card">
-                    <a href="#intro-modal" class="work-card-link" aria-label="查看數位科技概論課程介紹詳情">
-                        <div>
-                            <span class="badge-status completed">課程單元</span>
-                            <h3>數位科技概論</h3>
-                            <p>探索資訊科技發展、網路原理、資訊安全與數位創新的核心課程。</p>
-                        </div>
-                        <span class="btn-detail">查看細部頁面 &rarr;</span>
-                    </a>
-                </div>
+                <!-- 數位科技概論卡片 -->
+                <a href="#intro-modal" class="work-card featured">
+                    <div>
+                        <span class="badge-status active">點擊查看課程作業</span>
+                        <h3>數位科技概論</h3>
+                        <p>點擊進入專屬學習細部頁面，瀏覽 5 堂課的精選作業與學習成果記錄。</p>
+                    </div>
+                    <div class="card-link-text">瀏覽五堂課作業區 →</div>
+                </a>
 
                 <!-- 期中作品 -->
                 <div class="work-card">
@@ -547,35 +554,6 @@
             </div>
         </section>
 
-        <!-- CSS Target Modal Page for 數位科技概論 -->
-        <div id="intro-modal" class="modal" role="dialog" aria-labelledby="modal-title">
-            <a href="#works" class="modal-overlay-close" aria-label="關閉視窗"></a>
-            <div class="modal-content">
-                <a href="#works" class="modal-close" aria-label="關閉">&times;</a>
-                <div class="modal-header">
-                    <span class="badge-status completed">課程詳細介紹</span>
-                    <h3 id="modal-title">數位科技概論</h3>
-                </div>
-                <div class="modal-body">
-                    <p>這門課程旨在引導學生建立對現代資訊科技的整體視野與基礎概念，並能將技術靈活運用於實務作品中。</p>
-                    
-                    <h4>核心學習主題：</h4>
-                    <ul>
-                        <li><strong>網頁前端技術基礎：</strong>學習 HTML5 語意化結構與 CSS3 響應式網頁設計（RWD）。</li>
-                        <li><strong>網路與通訊概念：</strong>理解網際網路運作架構、網域與 HTTP/HTTPS 傳輸協定。</li>
-                        <li><strong>資訊安全與倫理：</strong>探討個人資料保護、數位著作權與資訊安全防範措施。</li>
-                        <li><strong>新興數位科技：</strong>探索人工智慧（AI）、雲端運算與物聯網的當代應用。</li>
-                    </ul>
-
-                    <h4>學習實作目標：</h4>
-                    <p>透過個人作品集網站的建立，將課堂所學的程式技術進行整合實作，並紀錄個人學習軌跡。</p>
-                </div>
-                <div class="modal-footer">
-                    <a href="#works" class="btn-close-modal">返回作品列表</a>
-                </div>
-            </div>
-        </div>
-
         <!-- Learning Goals Section -->
         <section id="goals">
             <h2 class="section-title">學習目標</h2>
@@ -595,6 +573,142 @@
             </ul>
         </section>
     </main>
+
+    <!-- Modal Section: Course Details & Homework Grid -->
+    <div id="intro-modal" class="modal-overlay">
+        <div class="modal-content">
+            <a href="#works" class="modal-close" aria-label="關閉彈窗">&times;</a>
+            <h2 class="section-title">數位科技概論 - 課程作業區</h2>
+            <p style="margin-bottom: 1.5rem; color: var(--text-muted);">
+                歡迎來到數位科技概論細部頁面！點擊下方各週次區塊即可展開瀏覽具體的作業項目。
+            </p>
+
+            <div class="courses-stack">
+                <!-- 第一週 -->
+                <details class="week-group" open>
+                    <summary class="week-header">
+                       9/14
+                    </summary>
+                    <div class="homework-grid">
+                        <div class="homework-card">
+                            <div class="homework-card">
+    <h5>1</h5>
+       <!-- 新增超連結按鈕 -->
+    <a href="./01-html-text-u11017033.html" target="_blank" style="display: inline-block; margin-top: 0.5rem; color: #1d5f9f; font-weight: bold; text-decoration: underline;">
+        👉 點此查看作業內容
+    </a>
+                           </div>
+                        <div class="homework-card">
+
+     <h5>2 </h5>
+   <div class="homework-card">
+                       <!-- 新增作業連結按鈕 -->
+            <a href="./02-html-media-u11017033.html" target="_blank" style="display: inline-block; margin-top: 0.5rem; color: #1d5f9f; font-weight: bold; text-decoration: underline;">
+                👉 點此查看作業內容
+            </a>
+</div>
+                        <div class="homework-card">
+  <h5>3</h5>
+   <div class="homework-card">
+                       <!-- 新增作業連結按鈕 -->
+            <a href="./02-html-media-u11017033.html" target="_blank" style="display: inline-block; margin-top: 0.5rem; color: #1d5f9f; font-weight: bold; text-decoration: underline;">
+                👉 點此查看作業內容
+            </a>
+</div>
+                        <div class="homework-card">
+        <h5>1-4 Flexbox 彈性排版</h5>
+                            <p>學習一維切版與對齊技巧。</p>
+                            <span class="homework-tag">作業完成</span>
+                        </div>
+                        <div class="homework-card">
+                            <h5>1-5 RWD 響應式網頁</h5>
+                            <p>使用 Media Queries 適應手機。</p>
+                                                  </div>
+                        <div class="homework-card">
+                            <h5>1-6 網頁無障礙設定</h5>
+                            <p>焦點狀態與對比度優化。</p>
+                            <span class="homework-tag">作業完成</span>
+                        </div>
+                        <div class="homework-card">
+                            <h5>1-7 Git & GitHub 操作</h5>
+                            <p>版本控制與儲存庫建立。</p>
+                            <span class="homework-tag">作業完成</span>
+                        </div>
+                        <div class="homework-card">
+                            <h5>1-8 GitHub Pages 發布</h5>
+                            <p>將作品集首頁免費上傳部署。</p>
+                            <span class="homework-tag">作業完成</span>
+                        </div>
+                        <div class="homework-card">
+                            <h5>1-9 個人學習心得</h5>
+                            <p>整理第一週數位科技心得。</p>
+                            <span class="homework-tag">作業完成</span>
+                        </div>
+                    </div>
+                </details>
+
+                                                     
+                        
+
+                <!-- 第二週 -->
+                <details class="week-group">
+                    <summary class="week-header">第二週：進階網頁排版與組件設計</summary>
+                    <div class="homework-grid">
+                        <div class="homework-card">
+                            <h5>2-1 CSS Grid 網格佈局</h5>
+                            <p>二維排版原理與實作。</p>
+                            <span class="homework-tag">作業準備中</span>
+                        </div>
+                        <div class="homework-card">
+                            <h5>2-2 互動組件設計</h5>
+                            <p>純 CSS 動畫與轉場效果。</p>
+                            <span class="homework-tag">作業準備中</span>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- 第三週 -->
+                <details class="week-group">
+                    <summary class="week-header">第三週：數位媒體與資料傳輸基礎</summary>
+                    <div class="homework-grid">
+                        <div class="homework-card">
+                            <h5>3-1 網路通訊協定概論</h5>
+                            <p>HTTP/HTTPS 與網域原理。</p>
+                            <span class="homework-tag">作業準備中</span>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- 第四週 -->
+                <details class="week-group">
+                    <summary class="week-header">第四週：資訊安全與個人資料保護</summary>
+                    <div class="homework-grid">
+                        <div class="homework-card">
+                            <h5>4-1 資安風險與防範</h5>
+                            <p>基礎網路安全意識養成。</p>
+                            <span class="homework-tag">作業準備中</span>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- 第五週 -->
+                <details class="week-group">
+                    <summary class="week-header">第五週：新興數位科技應用與專題規劃</summary>
+                    <div class="homework-grid">
+                        <div class="homework-card">
+                            <h5>5-1 AI 工具導論與實務</h5>
+                            <p>生成式 AI 在職場的應用。</p>
+                            <span class="homework-tag">作業準備中</span>
+                        </div>
+                    </div>
+                </details>
+            </div>
+
+            <div style="text-align: right; margin-top: 2rem;">
+                <a href="#works" style="display: inline-block; background-color: var(--primary-blue); color: #ffffff; padding: 0.6rem 1.5rem; border-radius: var(--radius-sm); text-decoration: none; font-weight: bold;">回到作品展示區</a>
+            </div>
+        </div>
+    </div>
 
     <footer>
         <p>&copy; 吳宜蓁 的學習作品集 | 數位科技概論學習成果</p>
