@@ -216,6 +216,23 @@
             transform: translateY(-3px);
         }
 
+        /* Clickable Card Link Style */
+        .work-card-link {
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+        }
+
+        .work-card.active-card {
+            border-style: solid;
+            border-color: var(--secondary-blue);
+            cursor: pointer;
+            box-shadow: var(--shadow-md);
+        }
+
         .badge-status {
             align-self: center;
             background-color: var(--light-yellow);
@@ -229,10 +246,155 @@
             margin-bottom: 1rem;
         }
 
-        .work-card h3 {
+        .badge-status.completed {
+            background-color: #dcfce7;
+            color: #166534;
+            border-color: #86efac;
+        }
+
+        .btn-detail {
+            display: inline-block;
+            margin-top: 1rem;
+            background-color: var(--primary-blue);
+            color: #ffffff;
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: background-color 0.2s;
+        }
+
+        .work-card:hover .btn-detail {
+            background-color: var(--secondary-blue);
+            color: var(--accent-yellow);
+        }
+
+        /* CSS-Only Modal using :target */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(15, 60, 110, 0.6);
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            z-index: 1000;
+            padding: 1.5rem;
+        }
+
+        .modal:target {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-content {
+            background-color: #ffffff;
+            max-width: 650px;
+            width: 100%;
+            max-height: 85vh;
+            overflow-y: auto;
+            border-radius: var(--radius-lg);
+            padding: 2.5rem 2rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+            position: relative;
+            border-top: 6px solid var(--accent-yellow);
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+
+        .modal:target .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1.25rem;
+            right: 1.5rem;
+            font-size: 1.75rem;
+            font-weight: bold;
+            color: var(--text-muted);
+            text-decoration: none;
+            line-height: 1;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background-color: var(--bg-main);
+            transition: background-color 0.2s, color 0.2s;
+        }
+
+        .modal-close:hover {
+            background-color: var(--accent-yellow);
             color: var(--primary-blue);
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
+        }
+
+        .modal-overlay-close {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            text-decoration: none;
+        }
+
+        .modal-header {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .modal-header h3 {
+            color: var(--primary-blue);
+            font-size: 1.75rem;
+            margin-top: 0.5rem;
+        }
+
+        .modal-body {
+            color: var(--text-dark);
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+
+        .modal-body h4 {
+            color: var(--secondary-blue);
+            margin: 1.25rem 0 0.5rem 0;
+            font-size: 1.15rem;
+        }
+
+        .modal-body ul {
+            padding-left: 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .modal-footer {
+            margin-top: 2rem;
+            text-align: right;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .btn-close-modal {
+            display: inline-block;
+            background-color: var(--primary-blue);
+            color: #ffffff;
+            padding: 0.6rem 1.25rem;
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.2s;
+        }
+
+        .btn-close-modal:hover {
+            background-color: var(--secondary-blue);
+            color: var(--accent-yellow);
         }
 
         .work-card p {
@@ -353,6 +515,18 @@
         <section id="works">
             <h2 class="section-title">作品展示</h2>
             <div class="works-container">
+                <!-- 數位科技概論卡片（可點擊查看細部頁面） -->
+                <div class="work-card active-card">
+                    <a href="#intro-modal" class="work-card-link" aria-label="查看數位科技概論課程介紹詳情">
+                        <div>
+                            <span class="badge-status completed">課程單元</span>
+                            <h3>數位科技概論</h3>
+                            <p>探索資訊科技發展、網路原理、資訊安全與數位創新的核心課程。</p>
+                        </div>
+                        <span class="btn-detail">查看細部頁面 &rarr;</span>
+                    </a>
+                </div>
+
                 <!-- 期中作品 -->
                 <div class="work-card">
                     <div>
@@ -372,6 +546,35 @@
                 </div>
             </div>
         </section>
+
+        <!-- CSS Target Modal Page for 數位科技概論 -->
+        <div id="intro-modal" class="modal" role="dialog" aria-labelledby="modal-title">
+            <a href="#works" class="modal-overlay-close" aria-label="關閉視窗"></a>
+            <div class="modal-content">
+                <a href="#works" class="modal-close" aria-label="關閉">&times;</a>
+                <div class="modal-header">
+                    <span class="badge-status completed">課程詳細介紹</span>
+                    <h3 id="modal-title">數位科技概論</h3>
+                </div>
+                <div class="modal-body">
+                    <p>這門課程旨在引導學生建立對現代資訊科技的整體視野與基礎概念，並能將技術靈活運用於實務作品中。</p>
+                    
+                    <h4>核心學習主題：</h4>
+                    <ul>
+                        <li><strong>網頁前端技術基礎：</strong>學習 HTML5 語意化結構與 CSS3 響應式網頁設計（RWD）。</li>
+                        <li><strong>網路與通訊概念：</strong>理解網際網路運作架構、網域與 HTTP/HTTPS 傳輸協定。</li>
+                        <li><strong>資訊安全與倫理：</strong>探討個人資料保護、數位著作權與資訊安全防範措施。</li>
+                        <li><strong>新興數位科技：</strong>探索人工智慧（AI）、雲端運算與物聯網的當代應用。</li>
+                    </ul>
+
+                    <h4>學習實作目標：</h4>
+                    <p>透過個人作品集網站的建立，將課堂所學的程式技術進行整合實作，並紀錄個人學習軌跡。</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="#works" class="btn-close-modal">返回作品列表</a>
+                </div>
+            </div>
+        </div>
 
         <!-- Learning Goals Section -->
         <section id="goals">
